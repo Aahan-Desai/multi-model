@@ -74,9 +74,6 @@ class Settings(BaseSettings):
         ".jpg",
         ".jpeg",
         ".webp",
-        ".gif",
-        ".bmp",
-        ".tiff",
     }
 
     supported_video_extensions: set[str] = {
@@ -84,7 +81,6 @@ class Settings(BaseSettings):
         ".mov",
         ".avi",
         ".mkv",
-        ".webm",
     }
 
     # Chunking
