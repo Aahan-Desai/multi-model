@@ -91,9 +91,8 @@ class ToolExecutor:
 
             case "vision_analysis":
                 if media_path is None:
-                    return (
-                        "No image or video file was provided. "
-                        "Please select or upload an image/video in the Vision panel on the right and click 'Upload & Analyze' to inspect visual content."
+                    raise ValueError(
+                        "Vision analysis requires a media file."
                     )
 
                 prompt = arguments.get("prompt")
