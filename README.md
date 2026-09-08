@@ -37,7 +37,7 @@ At a high level:
 - Uvicorn
 - Pydantic / Pydantic Settings
 - Qdrant
-- Ollama
+- OpenAI embeddings
 - Google Gemini
 - Tavily
 
@@ -57,7 +57,7 @@ Before running the project, make sure you have:
 - Node.js 20+ and npm
 - access to the required external services configured in your environment file
 - a local or remote Qdrant instance
-- Ollama running if you are using embedding or model endpoints through it
+- an OpenAI API key for document embeddings
 
 ## Environment Setup
 
@@ -65,7 +65,7 @@ The backend reads configuration from [.env](.env). Make sure that file exists in
 
 - Groq
 - Gemini
-- Ollama
+- OpenAI
 - Qdrant
 - Tavily
 - storage and ingestion settings

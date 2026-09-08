@@ -29,12 +29,9 @@ class Settings(BaseSettings):
     gemini_video_processing_timeout: int = 60
     gemini_video_poll_interval: int = 2
     
-    # Ollama (Embeddings)
-    ollama_base_url: str
-    ollama_embedding_model: str
-    
     # Embeddings
-    
+
+    openai_api_key: str
     embedding_provider: str
     embedding_model: str
     embedding_dimension: int

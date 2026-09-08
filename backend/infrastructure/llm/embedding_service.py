@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ollama import Client
+from openai import OpenAI
 
 from backend.core.config import settings
 from backend.core.logging import get_logger
@@ -10,16 +10,16 @@ logger = get_logger(__name__)
 
 class EmbeddingService:
     """
-    Service responsible for generating embeddings using Ollama.
+    Service responsible for generating embeddings using OpenAI.
 
     This service provides a provider-agnostic interface for embedding
     generation. The rest of the application should depend only on this
-    service rather than the Ollama SDK.
+    service rather than the OpenAI SDK.
     """
 
-    def __init__(self, client: Client | None = None) -> None:
-        self._client = client or Client(host=settings.ollama_base_url)
-        self._model = settings.ollama_embedding_model
+    def __init__(self, client: OpenAI | None = None) -> None:
+        self._client = client or OpenAI(api_key=settings.openai_api_key)
+        self._model = settings.embedding_model
 
     def embed_text(self, text: str) -> list[float]:
         """
@@ -65,12 +65,12 @@ class EmbeddingService:
             len(texts),
         )
 
-        response = self._client.embed(
+        response = self._client.embeddings.create(
             model=self._model,
             input=texts,
         )
 
-        embeddings = response.embeddings
+        embeddings = [item.embedding for item in response.data]
 
         if len(embeddings) != len(texts):
             raise RuntimeError(
