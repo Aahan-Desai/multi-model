@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
-
-from docling.document_converter import DocumentConverter
+from typing import TYPE_CHECKING, Any
 
 from backend.core.logging import get_logger
 from backend.models.processed_document import ProcessedDocument
+
+if TYPE_CHECKING:
+    from docling.document_converter import DocumentConverter
 
 logger = get_logger(__name__)
 
@@ -19,7 +21,15 @@ class DocumentProcessor:
     """
 
     def __init__(self, converter: DocumentConverter | None = None) -> None:
-        self._converter = converter or DocumentConverter()
+        self._converter: DocumentConverter | Any | None = converter
+
+    def _get_converter(self) -> DocumentConverter | Any:
+        if self._converter is None:
+            from docling.document_converter import DocumentConverter
+
+            self._converter = DocumentConverter()
+
+        return self._converter
 
     def extract_document(
         self,
@@ -45,7 +55,7 @@ class DocumentProcessor:
             file_path,
         )
 
-        result = self._converter.convert(file_path)
+        result = self._get_converter().convert(file_path)
 
         text = result.document.export_to_markdown().strip()
 
