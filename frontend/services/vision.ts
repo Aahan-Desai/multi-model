@@ -17,9 +17,6 @@ export async function analyzeVisionMedia(
     "/vision/analyze",
     formData,
     {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       onUploadProgress(progressEvent) {
         if (!progressEvent.total || !onProgress) {
           return;

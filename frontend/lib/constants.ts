@@ -16,6 +16,9 @@ export const SUPPORTED_IMAGE_EXTENSIONS = [
   ".jpg",
   ".jpeg",
   ".webp",
+  ".gif",
+  ".bmp",
+  ".tiff",
 ] as const;
 
 export const SUPPORTED_VIDEO_EXTENSIONS = [
@@ -23,6 +26,7 @@ export const SUPPORTED_VIDEO_EXTENSIONS = [
   ".mov",
   ".avi",
   ".mkv",
+  ".webm",
 ] as const;
 
 export const DEFAULT_CHAT_SUGGESTIONS = [

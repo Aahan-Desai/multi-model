@@ -28,7 +28,7 @@ tools = [
 ]
 
 response = client.chat.completions.create(
-    model="qwen/qwen3-32b",
+    model=os.getenv("ORCHESTRATOR_MODEL", "qwen/qwen3.8-27b"),
     messages=[
     {
         "role": "system",

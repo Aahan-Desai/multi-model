@@ -9,9 +9,6 @@ export async function uploadDocument(
   formData.append("file", file);
 
   const response = await api.post<IngestionResult>("/upload", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
     onUploadProgress(progressEvent) {
       if (!progressEvent.total || !onProgress) {
         return;

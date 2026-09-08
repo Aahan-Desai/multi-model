@@ -69,15 +69,17 @@ export function VisionPanel({
                     <Button
                       type="button"
                       className="w-full"
-                      disabled={isLoading}
+                      disabled={isLoading || file.status === "uploading"}
                       onClick={() => onAnalyze(file.id, promptByFile[file.id])}
                     >
-                      {isLoading ? (
+                      {file.status === "uploading" || isLoading ? (
                         <Loader2 className="mr-2 size-4 animate-spin" />
                       ) : (
                         <Eye className="mr-2 size-4" />
                       )}
-                      Analyze {file.kind}
+                      {file.status === "uploading"
+                        ? `Analyzing ${file.kind}...`
+                        : `Upload & Analyze ${file.kind}`}
                     </Button>
                   </div>
                 }

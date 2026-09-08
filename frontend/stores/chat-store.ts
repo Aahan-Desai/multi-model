@@ -246,6 +246,17 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             : file,
         ),
       }));
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Vision analysis failed.";
+      set((state) => ({
+        uploadedFiles: state.uploadedFiles.map((file) =>
+          file.id === fileId
+            ? { ...file, status: "error", errorMessage: message }
+            : file,
+        ),
+      }));
+      throw error;
     } finally {
       set({ isVisionLoading: false });
     }
